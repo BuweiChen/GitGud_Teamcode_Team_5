@@ -76,8 +76,8 @@ public class OpMode_Linear extends LinearOpMode {
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        rightDriveFront.setDirection(DcMotor.Direction.REVERSE);
-        rightDriveRear.setDirection(DcMotor.Direction.REVERSE);
+        //rightDriveFront.setDirection(DcMotor.Direction.REVERSE);
+        //rightDriveRear.setDirection(DcMotor.Direction.REVERSE);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -93,15 +93,15 @@ public class OpMode_Linear extends LinearOpMode {
 
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
-
+            /*
             double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
-            double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x);
+            double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
             double rightX = gamepad1.right_stick_x;
             double v1 = r * Math.cos(robotAngle) + rightX;
             double v2 = r * Math.sin(robotAngle) - rightX;
             double v3 = r * Math.sin(robotAngle) + rightX;
             double v4 = r * Math.cos(robotAngle) - rightX;
-
+            */
             // Tank Mode uses one stick to control each wheel.
             // - This requires no math, but it is hard to drive forward slowly and keep straight.
             // leftPower  = -gamepad1.left_stick_y ;
@@ -109,14 +109,21 @@ public class OpMode_Linear extends LinearOpMode {
 
             // Send calculated power to wheels
 
+            double y = -gamepad1.left_stick_y; // Remember, this is reversed!
+            double x = gamepad1.left_stick_x;
+            double rx = gamepad1.right_stick_x;
+            double v1 = y + x + rx;
+            double v2 = y - x + rx;
+            double v3 = y - x - rx;
+            double v4 = y + x - rx;
             leftDriveFront.setPower(v1);
-            rightDriveFront.setPower(v2);
-            leftDriveRear.setPower(v3);
+            leftDriveRear.setPower(v2);
+            rightDriveFront.setPower(v3);
             rightDriveRear.setPower(v4);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Motors", "left front (%.2f), left rear (%.2f), right front (%.2f), right rear (%.2f)", v1, v3, v2, v4);
+            telemetry.addData("Motors", "left front (%.2f), left rear (%.2f), right front (%.2f), right rear (%.2f)", v1, v2, v3, v4);
             telemetry.update();
         }
     }
