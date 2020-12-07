@@ -112,10 +112,27 @@ public class OpMode_Linear extends LinearOpMode {
             double x = gamepad1.left_stick_x;
             double ry = gamepad1.right_stick_y;
             double rx = gamepad1.right_stick_x;
-            double v1 = x + ry + rx;
-            double v2 = x + ry - rx;
-            double v3 = x - ry - rx;
-            double v4 = x - ry + rx;
+            double speedRatio = 1;
+            if (gamepad1.x)
+            {
+                speedRatio = 0.25;
+            }
+            if (gamepad1.y)
+            {
+                speedRatio = 0.5;
+            }
+            if (gamepad1.b)
+            {
+                speedRatio = 0.75;
+            }
+            if (gamepad1.a)
+            {
+                speedRatio = 1;
+            }
+            double v1 = (-x + ry + rx) * speedRatio;
+            double v2 = (-x + ry - rx) * speedRatio;
+            double v3 = (-x - ry - rx) * speedRatio;
+            double v4 = (-x - ry + rx) * speedRatio;
             leftDriveFront.setPower(v1);
             leftDriveRear.setPower(v2);
             rightDriveFront.setPower(v3);
