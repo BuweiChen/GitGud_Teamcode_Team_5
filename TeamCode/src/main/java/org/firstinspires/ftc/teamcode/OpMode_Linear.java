@@ -141,7 +141,7 @@ public class OpMode_Linear extends LinearOpMode {
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left front (%.2f), left rear (%.2f), right front (%.2f), right rear (%.2f)", v1, v2, v3, v4);
-            telemetry.addData("Speed ratio", " " + speedRatio);
+            telemetry.addData("Speed ratio", speedRatio);
             telemetry.update();
         }
     }
