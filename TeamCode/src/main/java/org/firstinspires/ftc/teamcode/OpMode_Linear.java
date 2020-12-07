@@ -61,6 +61,7 @@ public class OpMode_Linear extends LinearOpMode {
     private DcMotor rightDriveFront = null;
     private DcMotor rightDriveRear = null;
 
+    private double speedRatio = 1;
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -112,7 +113,6 @@ public class OpMode_Linear extends LinearOpMode {
             double x = gamepad1.left_stick_x;
             double ry = gamepad1.right_stick_y;
             double rx = gamepad1.right_stick_x;
-            double speedRatio = 1;
             if (gamepad1.x)
             {
                 speedRatio = 0.25;
