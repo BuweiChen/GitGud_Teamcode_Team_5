@@ -111,11 +111,11 @@ public class OpMode_Linear extends LinearOpMode {
 
             double y = -gamepad1.left_stick_y; // Remember, this is reversed!
             double x = gamepad1.left_stick_x;
-            double rx = gamepad1.right_stick_x;
-            double v1 = y + x + rx;
-            double v2 = y - x + rx;
-            double v3 = y - x - rx;
-            double v4 = y + x - rx;
+            double ry = gamepad1.right_stick_y;
+            double v1 = y + x + ry;
+            double v2 = y - x + ry;
+            double v3 = y - x - ry;
+            double v4 = y + x - ry;
             leftDriveFront.setPower(v1);
             leftDriveRear.setPower(v2);
             rightDriveFront.setPower(v3);
