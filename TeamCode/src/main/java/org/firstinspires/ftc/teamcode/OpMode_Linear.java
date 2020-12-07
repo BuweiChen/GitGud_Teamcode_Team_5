@@ -109,14 +109,13 @@ public class OpMode_Linear extends LinearOpMode {
 
             // Send calculated power to wheels
 
-            double y = -gamepad1.left_stick_y; // Remember, this is reversed!
             double x = gamepad1.left_stick_x;
             double ry = gamepad1.right_stick_y;
             double rx = gamepad1.right_stick_x;
-            double v1 = y + x + ry + rx;
-            double v2 = y - x + ry - rx;
-            double v3 = y - x - ry - rx;
-            double v4 = y + x - ry + rx;
+            double v1 = x + ry + rx;
+            double v2 = x + ry - rx;
+            double v3 = x - ry - rx;
+            double v4 = x - ry + rx;
             leftDriveFront.setPower(v1);
             leftDriveRear.setPower(v2);
             rightDriveFront.setPower(v3);
